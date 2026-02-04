@@ -149,6 +149,82 @@ class RAGPipeline:
         print(f"Loaded current device: {self.current_device.get('DeviceName', self.current_device.get('device_name'))}")
         return self.current_device
     
+    def _extract_comparison_device(self, query: str) -> Optional[str]:
+        """Extract the name of the device being compared to from the query."""
+        query_lower = query.lower()
+        
+        # Patterns to extract the "other" device in comparison queries
+        # "compare X with Y" -> Y
+        # "X vs Y" -> Y
+        # "X versus Y" -> Y
+        # "compare X to Y" -> Y
+        # "difference between X and Y" -> Y
+        
+        patterns = [
+            r'(?:compare|comparing)\s+.+?\s+(?:with|to|and)\s+(.+?)(?:\?|$|\.|for|in terms)',
+            r'(?:vs\.?|versus)\s+(.+?)(?:\?|$|\.|for|in terms)',
+            r'difference\s+between\s+.+?\s+and\s+(.+?)(?:\?|$|\.|for)',
+            r'better\s+than\s+(?:a\s+|the\s+)?(.+?)(?:\?|$|\.|for)',
+            r'worse\s+than\s+(?:a\s+|the\s+)?(.+?)(?:\?|$|\.|for)',
+        ]
+        
+        for pattern in patterns:
+            match = re.search(pattern, query_lower, re.IGNORECASE)
+            if match:
+                device_name = match.group(1).strip()
+                # Clean up common trailing words
+                device_name = re.sub(r'\s+(for\s+.+|in\s+terms\s+.+|\?)$', '', device_name)
+                if len(device_name) > 3:  # Minimum reasonable device name length
+                    return device_name
+        
+        return None
+    
+    def _find_device_by_name(self, device_name: str) -> Optional[dict]:
+        """Find a device by name with fuzzy matching."""
+        if not device_name:
+            return None
+        
+        name_lower = device_name.lower().strip()
+        
+        # Try exact match first
+        if name_lower in self.processed_devices:
+            return self.processed_devices[name_lower]
+        
+        # Try partial match - device name contains the search term
+        best_match = None
+        best_score = 0
+        
+        for key, device in self.processed_devices.items():
+            # Check if search term is in device key
+            if name_lower in key:
+                # Score based on how close the match is
+                score = len(name_lower) / len(key)
+                if score > best_score:
+                    best_score = score
+                    best_match = device
+            # Check if device key is in search term
+            elif key in name_lower:
+                score = len(key) / len(name_lower)
+                if score > best_score:
+                    best_score = score
+                    best_match = device
+        
+        # Also check DeviceName and device_name fields directly
+        for key, device in self.processed_devices.items():
+            dev_name = (device.get('device_name') or device.get('DeviceName', '')).lower()
+            if name_lower in dev_name or dev_name in name_lower:
+                # Prefer more specific matches
+                score = min(len(name_lower), len(dev_name)) / max(len(name_lower), len(dev_name))
+                if score > best_score:
+                    best_score = score
+                    best_match = device
+        
+        # Only return if we have a reasonable match (>50% similarity)
+        if best_score > 0.3:
+            return best_match
+        
+        return None
+    
     def classify_query(self, query: str) -> dict:
         """Classify the type of query and extract intent."""
         query_lower = query.lower()
@@ -158,7 +234,8 @@ class RAGPipeline:
             'intent': None,
             'entities': [],
             'requires_comparison': False,
-            'requires_current_device': True
+            'requires_current_device': True,
+            'comparison_device_name': None  # Name of device to compare to
         }
         
         # Check for comparison queries
@@ -170,6 +247,8 @@ class RAGPipeline:
             if re.search(pattern, query_lower):
                 classification['type'] = 'comparison'
                 classification['requires_comparison'] = True
+                # Extract the comparison device name
+                classification['comparison_device_name'] = self._extract_comparison_device(query)
                 break
         
         # Check for capability queries
@@ -233,17 +312,29 @@ class RAGPipeline:
             contexts.append(current_doc)
             retrieved_devices.append(self.current_device)
         
-        # For comparisons, search for mentioned devices
+        # For comparisons, find the specific device mentioned
         if classification['requires_comparison']:
-            search_results = self.vector_index.search(query, n_results=n_results)
-            for result in search_results:
-                # Don't duplicate current device
-                if result['metadata'].get('device_name') != self.current_device.get('device_name', ''):
-                    device_name = result['metadata'].get('device_name', '')
-                    device = self.processed_devices.get(device_name.lower())
-                    if device:
-                        contexts.append(self._format_device_context(device, is_current=False))
-                        retrieved_devices.append(device)
+            comparison_device_name = classification.get('comparison_device_name')
+            comparison_device = None
+            
+            if comparison_device_name:
+                # Try to find the specific device mentioned
+                comparison_device = self._find_device_by_name(comparison_device_name)
+            
+            if comparison_device:
+                # Check it's not the same as current device
+                current_name = (self.current_device.get('device_name') or 
+                               self.current_device.get('DeviceName', '')).lower()
+                comparison_name = (comparison_device.get('device_name') or 
+                                  comparison_device.get('DeviceName', '')).lower()
+                
+                if current_name != comparison_name:
+                    contexts.append(self._format_device_context(comparison_device, is_current=False))
+                    retrieved_devices.append(comparison_device)
+            else:
+                # Mark that comparison device was not found
+                classification['comparison_device_not_found'] = True
+                classification['comparison_device_requested'] = comparison_device_name
         
         # Add capability assessment if relevant
         if classification['type'] == 'capability' and classification['intent'] and self.current_device:
@@ -545,6 +636,17 @@ ANSWER (be brief, then stop):"""
         # Retrieve context
         context, retrieved_devices = self.retrieve_context(query, classification)
         
+        # Handle comparison device not found
+        if classification.get('comparison_device_not_found'):
+            requested_device = classification.get('comparison_device_requested', 'that device')
+            current_name = self.current_device.get('device_name') or self.current_device.get('DeviceName', 'your current device')
+            yield {
+                'response': f"I don't have '{requested_device}' in my database, so I can't compare it with {current_name}. Try comparing with a device from the dropdown list, or ask me about {current_name}'s specifications instead.",
+                'classification': classification,
+                'done': True
+            }
+            return
+        
         # Build prompt
         prompt = self.build_prompt(query, context, classification)
         
@@ -618,6 +720,17 @@ ANSWER (be brief, then stop):"""
         
         # Retrieve context
         context, retrieved_devices = self.retrieve_context(query, classification)
+        
+        # Handle comparison device not found
+        if classification.get('comparison_device_not_found'):
+            requested_device = classification.get('comparison_device_requested', 'that device')
+            current_name = self.current_device.get('device_name') or self.current_device.get('DeviceName', 'your current device')
+            return {
+                'response': f"I don't have '{requested_device}' in my database, so I can't compare it with {current_name}. Try comparing with a device from the dropdown list, or ask me about {current_name}'s specifications instead.",
+                'classification': classification,
+                'context_used': None,
+                'devices_retrieved': [d.get('device_name', d.get('DeviceName', 'Unknown')) for d in retrieved_devices]
+            }
         
         # Build prompt
         prompt = self.build_prompt(query, context, classification)
