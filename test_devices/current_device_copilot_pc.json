@@ -1,0 +1,60 @@
+{
+  "device": {
+    "SKUID": "TEST-COPILOT-001",
+    "DeviceName": "Microsoft Surface Laptop 7",
+    "Brand": "Microsoft",
+    "Category": "Copilot+ PC",
+    "OS": "Windows 11 Home",
+    "Specification": {
+      "CPU": "Snapdragon X Elite",
+      "CPUFamily": "Snapdragon X",
+      "Memory": "16 GB",
+      "InternalMemoryType": "LPDDR5x",
+      "Storage": "512 GB",
+      "StorageMedia": "SSD",
+      "ScreenSize": "13.8 inch",
+      "GPU": "Qualcomm Adreno",
+      "dGPU": "",
+      "HasGPU": "Yes",
+      "HasdGPU": "No",
+      "BatteryLife": "Up to 20 hours",
+      "HDMIPorts": "0",
+      "USBPorts": "2",
+      "USB30CPorts": "2",
+      "ThunderboltPorts": "0",
+      "Touchscreen": "Yes",
+      "FingerprintReader": "Yes",
+      "NGAINPU": "45 TOPS",
+      "HDtype": "PixelSense",
+      "Has4K": "No"
+    },
+    "Feature": ["Hello", "Touch", "Ink", "Longbatterylife", "Portability", "Copilot+ PC experiences", "Security"],
+    "PrimaryActivities": ["work", "multitasking", "creating", "entertainment"],
+    "IsNPU": "Y",
+    "Description": "A Copilot+ PC with Snapdragon X Elite, featuring advanced AI capabilities and all-day battery life.",
+    "HardCodedPrice": "$1,299.99",
+    "PriceRange": {
+      "MinPrice": "1299",
+      "MaxPrice": "1499"
+    },
+    "YesRAM": "16GB LPDDR5x for fast, efficient performance",
+    "NoRAM": "",
+    "YesProcessor": "Snapdragon X Elite delivers exceptional battery life and AI performance",
+    "NoProcessor": "",
+    "YesNPU": "45 TOPS NPU enables Copilot+ PC experiences like Recall, Live Captions, and Cocreator",
+    "NoNPU": ""
+  },
+  "test_scenarios": [
+    "Does this have Copilot features?",
+    "What AI features can I use?",
+    "Can I play games on this?",
+    "How long does the battery last?",
+    "Is this good for coding?"
+  ],
+  "expected_responses": {
+    "copilot": "Yes - 45 TOPS NPU enables full Copilot+ PC experiences including Recall, Live Captions, Cocreator, Windows Studio Effects",
+    "gaming": "Limited - integrated Qualcomm Adreno GPU, suitable for casual/older games, not AAA titles",
+    "battery": "Up to 20 hours - one of the longest battery lives available",
+    "best_for": "Productivity, AI features, travel, all-day work"
+  }
+}

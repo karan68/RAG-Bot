@@ -1,0 +1,769 @@
+{
+  "version": "1.0.0",
+  "description": "Inference rules for device capability assessment. Maps device specifications to capability levels.",
+  "capability_levels": {
+    "none": "Not capable / Not recommended",
+    "basic": "Basic/light usage only",
+    "moderate": "Moderate usage, some limitations",
+    "good": "Good performance for most tasks",
+    "excellent": "Excellent performance, professional grade"
+  },
+  "rules": {
+    "video_editing": [
+      {
+        "id": "ve_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["high-end", "enthusiast", "workstation"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for professional video editing including 4K/8K footage, color grading, and effects."
+        }
+      },
+      {
+        "id": "ve_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["performance", "high-end", "entry-dedicated"] }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for video editing including 4K footage. Handles Premiere Pro, DaVinci Resolve well."
+        }
+      },
+      {
+        "id": "ve_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": false,
+          "gpu_tier": { "in": ["integrated-performance"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can handle 1080p video editing with some limitations. 4K editing will be slow."
+        }
+      },
+      {
+        "id": "ve_moderate_2",
+        "conditions": {
+          "ram_gb": { "gte": 8, "lt": 16 },
+          "has_dedicated_gpu": true
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can handle basic video editing. Consider upgrading RAM for better performance."
+        }
+      },
+      {
+        "id": "ve_basic_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "has_dedicated_gpu": false
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited to basic video editing and simple projects. 1080p editing possible but slow."
+        }
+      },
+      {
+        "id": "ve_none_1",
+        "conditions": {
+          "ram_gb": { "lt": 8 }
+        },
+        "result": {
+          "level": "none",
+          "message": "Not recommended for video editing. Insufficient RAM for smooth editing experience."
+        }
+      }
+    ],
+    "gaming": [
+      {
+        "id": "gaming_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["enthusiast", "high-end"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for gaming. Can run AAA games at high/ultra settings with high frame rates."
+        }
+      },
+      {
+        "id": "gaming_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["performance"] }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for gaming. Can run most AAA games at medium-high settings at 1080p."
+        }
+      },
+      {
+        "id": "gaming_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["entry-dedicated"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Moderate gaming capability. Can play most games at low-medium settings. Good for esports titles."
+        }
+      },
+      {
+        "id": "gaming_basic_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "has_dedicated_gpu": false,
+          "gpu_tier": { "in": ["integrated-performance"] }
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited gaming. Suitable for older games, indie titles, and esports games at low settings."
+        }
+      },
+      {
+        "id": "gaming_basic_2",
+        "conditions": {
+          "good_for_gaming": true,
+          "has_dedicated_gpu": false
+        },
+        "result": {
+          "level": "basic",
+          "message": "Suitable for casual gaming only. Browser games and lightweight titles work well."
+        }
+      },
+      {
+        "id": "gaming_none_1",
+        "conditions": {
+          "ram_gb": { "lt": 8 },
+          "has_dedicated_gpu": false
+        },
+        "result": {
+          "level": "none",
+          "message": "Not suitable for gaming beyond very basic browser games."
+        }
+      }
+    ],
+    "photo_editing": [
+      {
+        "id": "pe_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "is_4k": true
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for photo editing. GPU acceleration and 4K display ideal for Photoshop, Lightroom."
+        }
+      },
+      {
+        "id": "pe_excellent_2",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "is_fhd": true
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for photo editing with high RAM for large files and batch processing."
+        }
+      },
+      {
+        "id": "pe_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "gpu_tier": { "in": ["integrated-performance", "entry-dedicated", "performance", "high-end"] }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for photo editing. Handles Photoshop, Lightroom, and similar software well."
+        }
+      },
+      {
+        "id": "pe_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 8, "lt": 16 }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can handle photo editing for standard use. Large files may be slow."
+        }
+      },
+      {
+        "id": "pe_basic_1",
+        "conditions": {
+          "ram_gb": { "lt": 8 }
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited to basic photo editing. Use lightweight editors like Photos app."
+        }
+      }
+    ],
+    "3d_modeling": [
+      {
+        "id": "3d_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["workstation", "enthusiast", "high-end"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for 3D modeling and rendering. Handles Blender, Maya, 3ds Max professionally."
+        }
+      },
+      {
+        "id": "3d_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["performance", "high-end"] }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for 3D modeling. Can handle moderately complex scenes and rendering."
+        }
+      },
+      {
+        "id": "3d_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["entry-dedicated"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can do basic 3D modeling. Complex scenes and rendering will be slow."
+        }
+      },
+      {
+        "id": "3d_none_1",
+        "conditions": {
+          "has_dedicated_gpu": false
+        },
+        "result": {
+          "level": "none",
+          "message": "Not recommended for 3D modeling. Requires dedicated GPU for reasonable performance."
+        }
+      }
+    ],
+    "programming": [
+      {
+        "id": "prog_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "cpu_tier": { "in": ["performance", "high-end"] },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for programming. Handles large IDEs, multiple containers, and compilation smoothly."
+        }
+      },
+      {
+        "id": "prog_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "cpu_tier": { "in": ["mainstream", "performance", "high-end"] },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for programming. Handles VS Code, Visual Studio, JetBrains IDEs well."
+        }
+      },
+      {
+        "id": "prog_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Suitable for programming with some limitations. May slow down with large projects."
+        }
+      },
+      {
+        "id": "prog_basic_1",
+        "conditions": {
+          "ram_gb": { "lt": 8 }
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited for programming. Use lightweight editors. IDEs may be slow."
+        }
+      }
+    ],
+    "ai_ml_development": [
+      {
+        "id": "aiml_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["high-end", "enthusiast", "workstation"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for AI/ML development. CUDA cores enable model training and inference."
+        }
+      },
+      {
+        "id": "aiml_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_npu": true,
+          "is_copilot_plus": true
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for AI tasks with NPU acceleration. Excellent for on-device inference."
+        }
+      },
+      {
+        "id": "aiml_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["performance", "entry-dedicated"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can handle small ML models and inference. Large model training not recommended."
+        }
+      },
+      {
+        "id": "aiml_basic_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": false
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited AI/ML capability. CPU-only inference possible but slow."
+        }
+      },
+      {
+        "id": "aiml_none_1",
+        "conditions": {
+          "ram_gb": { "lt": 16 }
+        },
+        "result": {
+          "level": "none",
+          "message": "Not suitable for AI/ML development. Insufficient resources."
+        }
+      }
+    ],
+    "office_productivity": [
+      {
+        "id": "office_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for office work. Handles Microsoft 365, Google Workspace, multitasking smoothly."
+        }
+      },
+      {
+        "id": "office_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for office productivity. Word, Excel, PowerPoint run well."
+        }
+      },
+      {
+        "id": "office_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 4 }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Adequate for basic office tasks. May slow down with many tabs/apps open."
+        }
+      }
+    ],
+    "web_browsing": [
+      {
+        "id": "web_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for web browsing. Can handle many tabs without slowdown."
+        }
+      },
+      {
+        "id": "web_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for web browsing. Handles typical browsing needs well."
+        }
+      },
+      {
+        "id": "web_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 4, "lt": 8 }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Adequate for light browsing. Limit number of open tabs."
+        }
+      }
+    ],
+    "streaming_content_creation": [
+      {
+        "id": "stream_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "has_dedicated_gpu": true,
+          "gpu_tier": { "in": ["performance", "high-end", "enthusiast"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for streaming and content creation. GPU encoding for smooth OBS/streaming."
+        }
+      },
+      {
+        "id": "stream_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "cpu_tier": { "in": ["performance", "high-end"] }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for streaming. CPU encoding works well for 1080p streams."
+        }
+      },
+      {
+        "id": "stream_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "has_dedicated_gpu": true
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can stream at 720p. May need to lower quality for smooth performance."
+        }
+      },
+      {
+        "id": "stream_basic_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 },
+          "has_dedicated_gpu": false
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited streaming capability. Basic streams possible but quality may suffer."
+        }
+      }
+    ],
+    "copilot_features": [
+      {
+        "id": "copilot_excellent_1",
+        "conditions": {
+          "is_copilot_plus": true,
+          "npu_tops": { "gte": 40 }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Full Copilot+ PC experience. Supports Recall, Live Captions, Cocreator, Windows Studio Effects, and on-device AI."
+        }
+      },
+      {
+        "id": "copilot_good_1",
+        "conditions": {
+          "has_npu": true,
+          "npu_tops": { "gte": 10, "lt": 40 }
+        },
+        "result": {
+          "level": "good",
+          "message": "Has NPU for some AI acceleration. Basic Copilot features available, not full Copilot+ PC."
+        }
+      },
+      {
+        "id": "copilot_moderate_1",
+        "conditions": {
+          "has_npu": false,
+          "ram_gb": { "gte": 16 }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "No NPU but can use cloud-based Copilot features. Local AI features not available."
+        }
+      },
+      {
+        "id": "copilot_basic_1",
+        "conditions": {
+          "has_npu": false,
+          "ram_gb": { "lt": 16 }
+        },
+        "result": {
+          "level": "basic",
+          "message": "Basic Copilot via cloud only. No local AI acceleration or Copilot+ features."
+        }
+      }
+    ],
+    "ram_upgrade": [
+      {
+        "id": "ram_desktop_yes",
+        "conditions": {
+          "form_factor": { "in": ["desktop"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "RAM is typically upgradeable on desktops. Check motherboard specs for max capacity."
+        }
+      },
+      {
+        "id": "ram_aio_maybe",
+        "conditions": {
+          "form_factor": { "in": ["all-in-one"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Some All-in-Ones have upgradeable RAM. Check manufacturer specifications."
+        }
+      },
+      {
+        "id": "ram_laptop_lpddr",
+        "conditions": {
+          "form_factor": { "in": ["laptop", "2-in-1"] },
+          "ram_is_lpddr": true
+        },
+        "result": {
+          "level": "none",
+          "message": "LPDDR memory is soldered and cannot be upgraded. Consider this when purchasing."
+        }
+      },
+      {
+        "id": "ram_laptop_ddr",
+        "conditions": {
+          "form_factor": { "in": ["laptop", "2-in-1"] },
+          "ram_is_lpddr": false
+        },
+        "result": {
+          "level": "moderate",
+          "message": "May have upgradeable RAM slots. Check manufacturer specs - many modern laptops have soldered RAM."
+        }
+      }
+    ],
+    "gpu_upgrade": [
+      {
+        "id": "gpu_desktop_yes",
+        "conditions": {
+          "form_factor": { "in": ["desktop"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Desktop GPUs are typically upgradeable. Ensure power supply can handle new GPU."
+        }
+      },
+      {
+        "id": "gpu_laptop_egpu",
+        "conditions": {
+          "form_factor": { "in": ["laptop", "2-in-1"] },
+          "has_thunderbolt": true
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Internal GPU cannot be upgraded. External GPU (eGPU) possible via Thunderbolt port."
+        }
+      },
+      {
+        "id": "gpu_laptop_no",
+        "conditions": {
+          "form_factor": { "in": ["laptop", "2-in-1"] },
+          "has_thunderbolt": false
+        },
+        "result": {
+          "level": "none",
+          "message": "GPU cannot be upgraded. Laptop GPUs are soldered and no Thunderbolt for eGPU."
+        }
+      },
+      {
+        "id": "gpu_aio_no",
+        "conditions": {
+          "form_factor": { "in": ["all-in-one"] }
+        },
+        "result": {
+          "level": "none",
+          "message": "All-in-One GPUs cannot be upgraded. Consider external GPU if Thunderbolt available."
+        }
+      }
+    ],
+    "storage_upgrade": [
+      {
+        "id": "storage_desktop_yes",
+        "conditions": {
+          "form_factor": { "in": ["desktop"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Desktops typically have multiple drive bays. Easy to add more storage."
+        }
+      },
+      {
+        "id": "storage_laptop_maybe",
+        "conditions": {
+          "form_factor": { "in": ["laptop", "2-in-1", "all-in-one"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Many laptops have one M.2 slot. Check if accessible - some models have soldered storage."
+        }
+      }
+    ],
+    "portability": [
+      {
+        "id": "portable_excellent_1",
+        "conditions": {
+          "screen_inches": { "lte": 14 },
+          "battery_hours": { "gte": 10 },
+          "is_portable": true
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent portability. Compact size and long battery life ideal for travel."
+        }
+      },
+      {
+        "id": "portable_good_1",
+        "conditions": {
+          "screen_inches": { "lte": 15.6 },
+          "battery_hours": { "gte": 8 }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good portability. Reasonable size and battery for daily commute."
+        }
+      },
+      {
+        "id": "portable_moderate_1",
+        "conditions": {
+          "screen_inches": { "lte": 16 },
+          "form_factor": { "in": ["laptop", "2-in-1"] }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Moderate portability. Larger screen trades off against weight."
+        }
+      },
+      {
+        "id": "portable_none_1",
+        "conditions": {
+          "form_factor": { "in": ["desktop", "all-in-one"] }
+        },
+        "result": {
+          "level": "none",
+          "message": "Not portable. Designed for stationary use."
+        }
+      }
+    ],
+    "virtual_machines": [
+      {
+        "id": "vm_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "cpu_tier": { "in": ["performance", "high-end"] }
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent for running VMs. Can run multiple virtual machines simultaneously."
+        }
+      },
+      {
+        "id": "vm_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "cpu_tier": { "in": ["mainstream", "performance", "high-end"] }
+        },
+        "result": {
+          "level": "good",
+          "message": "Good for VMs. Can run 1-2 virtual machines comfortably."
+        }
+      },
+      {
+        "id": "vm_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 8, "lt": 16 }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Can run a single lightweight VM. Host system may slow down."
+        }
+      },
+      {
+        "id": "vm_none_1",
+        "conditions": {
+          "ram_gb": { "lt": 8 }
+        },
+        "result": {
+          "level": "none",
+          "message": "Not recommended for VMs. Insufficient RAM for virtualization."
+        }
+      }
+    ],
+    "multitasking": [
+      {
+        "id": "multi_excellent_1",
+        "conditions": {
+          "ram_gb": { "gte": 32 },
+          "cpu_tier": { "in": ["performance", "high-end"] },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "excellent",
+          "message": "Excellent multitasking. Run many apps, browser tabs, and processes without slowdown."
+        }
+      },
+      {
+        "id": "multi_good_1",
+        "conditions": {
+          "ram_gb": { "gte": 16 },
+          "is_ssd": true
+        },
+        "result": {
+          "level": "good",
+          "message": "Good multitasking capability. Handles typical workloads with multiple apps."
+        }
+      },
+      {
+        "id": "multi_moderate_1",
+        "conditions": {
+          "ram_gb": { "gte": 8 }
+        },
+        "result": {
+          "level": "moderate",
+          "message": "Moderate multitasking. Close unused apps to maintain performance."
+        }
+      },
+      {
+        "id": "multi_basic_1",
+        "conditions": {
+          "ram_gb": { "lt": 8 }
+        },
+        "result": {
+          "level": "basic",
+          "message": "Limited multitasking. Best for one task at a time."
+        }
+      }
+    ]
+  }
+}

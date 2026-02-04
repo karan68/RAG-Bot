@@ -1,0 +1,20 @@
+# Device Specification Chatbot - Dependencies
+# Full stack for local LLM chatbot
+
+# Core dependencies
+python>=3.10
+
+# JSON processing
+jsonschema>=4.21.0
+
+# Text processing
+regex>=2023.12.25
+
+# Phase 2: RAG & LLM
+chromadb>=0.4.22
+ollama>=0.3.0
+gradio>=5.0.0
+
+# Optional: For advanced features
+# llama-index>=0.11.0
+# sentence-transformers>=2.3.0

@@ -1,0 +1,60 @@
+{
+  "device": {
+    "SKUID": "TEST-BUDGET-001",
+    "DeviceName": "HP 15 Laptop",
+    "Brand": "HP",
+    "Category": "Laptops",
+    "OS": "Windows 11 Home",
+    "Specification": {
+      "CPU": "Intel Core i3-1215U",
+      "CPUFamily": "Intel Core i3",
+      "Memory": "8 GB",
+      "InternalMemoryType": "DDR4",
+      "Storage": "256 GB",
+      "StorageMedia": "SSD",
+      "ScreenSize": "15.6 inch",
+      "GPU": "Intel UHD Graphics",
+      "dGPU": "",
+      "HasGPU": "Yes",
+      "HasdGPU": "No",
+      "BatteryLife": "Up to 7 hours",
+      "HDMIPorts": "1",
+      "USBPorts": "3",
+      "USB30APorts": "2",
+      "USB30CPorts": "1",
+      "Touchscreen": "No",
+      "FingerprintReader": "No",
+      "NGAINPU": "",
+      "HDtype": "FHD",
+      "Has4K": "No"
+    },
+    "Feature": ["Portability", "Smode"],
+    "PrimaryActivities": ["justtheessentials", "school", "family"],
+    "IsNPU": "N",
+    "Description": "An everyday laptop for basic tasks, web browsing, and light productivity work.",
+    "HardCodedPrice": "$449.99",
+    "PriceRange": {
+      "MinPrice": "449",
+      "MaxPrice": "499"
+    },
+    "YesRAM": "8GB RAM handles everyday tasks smoothly",
+    "NoRAM": "May struggle with heavy multitasking",
+    "YesProcessor": "Intel Core i3 handles basic computing needs",
+    "NoProcessor": "Not ideal for demanding applications",
+    "YesNPU": "",
+    "NoNPU": "Does not have NPU for AI-accelerated tasks"
+  },
+  "test_scenarios": [
+    "Can I run video editing software?",
+    "Is this good for gaming?",
+    "Can I upgrade the RAM?",
+    "Does this have Copilot features?",
+    "What is this laptop best for?"
+  ],
+  "expected_responses": {
+    "video_editing": "Not recommended - 8GB RAM and integrated graphics limit video editing to very basic tasks only",
+    "gaming": "Suitable for very light/browser games only - no dedicated GPU",
+    "copilot": "No NPU - basic Copilot features via cloud only, no Copilot+ PC experiences",
+    "best_for": "Web browsing, documents, streaming, school work"
+  }
+}

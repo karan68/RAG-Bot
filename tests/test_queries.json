@@ -1,0 +1,611 @@
+{
+  "version": "1.0.0",
+  "description": "Test Q&A pairs for device chatbot evaluation. Covers spec lookups, capability questions, comparisons, upgrades, Copilot features, and out-of-scope handling.",
+  "test_cases": [
+    {
+      "id": "spec_001",
+      "category": "spec_lookup",
+      "question": "How much RAM does this device have?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["ram_gb", "ram_type"],
+      "expected_answer_contains": ["16", "GB", "RAM"],
+      "tags": ["memory", "basic"]
+    },
+    {
+      "id": "spec_002",
+      "category": "spec_lookup",
+      "question": "What processor does this laptop use?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["cpu_model", "cpu_family"],
+      "expected_answer_contains": ["Intel", "Core", "i5"],
+      "tags": ["cpu", "basic"]
+    },
+    {
+      "id": "spec_003",
+      "category": "spec_lookup",
+      "question": "What is the storage capacity?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["storage_gb", "storage_type"],
+      "expected_answer_contains": ["256", "GB", "SSD"],
+      "tags": ["storage", "basic"]
+    },
+    {
+      "id": "spec_004",
+      "category": "spec_lookup",
+      "question": "What's the screen size?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["screen_inches"],
+      "expected_answer_contains": ["14", "inch"],
+      "tags": ["display", "basic"]
+    },
+    {
+      "id": "spec_005",
+      "category": "spec_lookup",
+      "question": "Does this have a touchscreen?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["is_touchscreen"],
+      "expected_answer_contains": ["yes", "touch"],
+      "tags": ["display", "feature"]
+    },
+    {
+      "id": "spec_006",
+      "category": "spec_lookup",
+      "question": "What graphics card does it have?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_fields": ["primary_gpu", "dgpu_model"],
+      "expected_answer_contains": ["RTX", "4060"],
+      "tags": ["gpu", "basic"]
+    },
+    {
+      "id": "spec_007",
+      "category": "spec_lookup",
+      "question": "How long does the battery last?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_fields": ["battery_hours"],
+      "expected_answer_contains": ["20", "hours"],
+      "tags": ["battery", "basic"]
+    },
+    {
+      "id": "spec_008",
+      "category": "spec_lookup",
+      "question": "What ports does this have?",
+      "context_device": "Dell Precision 5680",
+      "expected_fields": ["hdmi_ports", "thunderbolt_ports", "usb30_c_ports"],
+      "expected_answer_contains": ["Thunderbolt", "port"],
+      "tags": ["connectivity", "basic"]
+    },
+    {
+      "id": "spec_009",
+      "category": "spec_lookup",
+      "question": "What's the price range?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_fields": ["price_min", "price_max"],
+      "expected_answer_contains": ["$", "1"],
+      "tags": ["price", "basic"]
+    },
+    {
+      "id": "spec_010",
+      "category": "spec_lookup",
+      "question": "What operating system does it run?",
+      "context_device": "HP 15 Laptop",
+      "expected_fields": ["os"],
+      "expected_answer_contains": ["Windows", "11"],
+      "tags": ["os", "basic"]
+    },
+    {
+      "id": "cap_001",
+      "category": "capability",
+      "question": "Can I run video editing software on this?",
+      "context_device": "HP 15 Laptop",
+      "expected_capability": "video_editing",
+      "expected_level": ["none", "basic"],
+      "expected_answer_contains": ["not", "8GB"],
+      "tags": ["video_editing", "negative"]
+    },
+    {
+      "id": "cap_002",
+      "category": "capability",
+      "question": "Can I edit videos on this laptop?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_capability": "video_editing",
+      "expected_level": ["good", "excellent"],
+      "expected_answer_contains": ["yes", "RTX", "4060", "16GB", "4K"],
+      "tags": ["video_editing", "positive"]
+    },
+    {
+      "id": "cap_003",
+      "category": "capability",
+      "question": "Is this good for gaming?",
+      "context_device": "HP 15 Laptop",
+      "expected_capability": "gaming",
+      "expected_level": ["none", "basic"],
+      "expected_answer_contains": ["not", "integrated"],
+      "tags": ["gaming", "negative"]
+    },
+    {
+      "id": "cap_004",
+      "category": "capability",
+      "question": "Can I play AAA games on this?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_capability": "gaming",
+      "expected_level": ["good", "excellent"],
+      "expected_answer_contains": ["yes", "AAA", "RTX", "high", "settings"],
+      "tags": ["gaming", "positive"]
+    },
+    {
+      "id": "cap_005",
+      "category": "capability",
+      "question": "Can I use Photoshop on this device?",
+      "context_device": "Lenovo Yoga 7i 2-in-1",
+      "expected_capability": "photo_editing",
+      "expected_level": ["good", "excellent"],
+      "expected_answer_contains": ["yes", "Photoshop", "16GB", "OLED"],
+      "tags": ["photo_editing", "positive"]
+    },
+    {
+      "id": "cap_006",
+      "category": "capability",
+      "question": "Is this suitable for programming?",
+      "context_device": "Dell Precision 5680",
+      "expected_capability": "programming",
+      "expected_level": ["excellent"],
+      "expected_answer_contains": ["excellent", "32GB", "Core i9", "IDE"],
+      "tags": ["programming", "positive"]
+    },
+    {
+      "id": "cap_007",
+      "category": "capability",
+      "question": "Can I run machine learning models on this?",
+      "context_device": "Dell Precision 5680",
+      "expected_capability": "ai_ml_development",
+      "expected_level": ["good", "excellent"],
+      "expected_answer_contains": ["GPU"],
+      "tags": ["ai_ml", "positive"]
+    },
+    {
+      "id": "cap_008",
+      "category": "capability",
+      "question": "Is this good for working from home?",
+      "context_device": "HP All-in-One 27",
+      "expected_capability": "office_productivity",
+      "expected_level": ["good", "excellent"],
+      "expected_answer_contains": ["yes", "work"],
+      "tags": ["office", "positive"]
+    },
+    {
+      "id": "cap_009",
+      "category": "capability",
+      "question": "Can I stream games on Twitch with this?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_capability": "streaming_content_creation",
+      "expected_level": ["good", "excellent"],
+      "expected_answer_contains": ["yes", "stream", "GPU", "encoding"],
+      "tags": ["streaming", "positive"]
+    },
+    {
+      "id": "cap_010",
+      "category": "capability",
+      "question": "Can I run virtual machines on this?",
+      "context_device": "Dell Precision 5680",
+      "expected_capability": "virtual_machines",
+      "expected_level": ["excellent"],
+      "expected_answer_contains": ["RAM"],
+      "tags": ["virtualization", "positive"]
+    },
+    {
+      "id": "cap_011",
+      "category": "capability",
+      "question": "Is this laptop portable for travel?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_capability": "portability",
+      "expected_level": ["excellent", "good"],
+      "expected_answer_contains": ["battery", "hour"],
+      "tags": ["portability", "positive"]
+    },
+    {
+      "id": "cap_012",
+      "category": "capability",
+      "question": "Can this handle multiple apps at once?",
+      "context_device": "Dell Precision 5680",
+      "expected_capability": "multitasking",
+      "expected_level": ["excellent"],
+      "expected_answer_contains": ["yes", "32GB"],
+      "tags": ["multitasking", "positive"]
+    },
+    {
+      "id": "cap_013",
+      "category": "capability",
+      "question": "Can I do 3D modeling with Blender?",
+      "context_device": "Dell Precision 5680",
+      "expected_capability": "3d_modeling",
+      "expected_level": ["excellent", "good"],
+      "expected_answer_contains": ["yes", "3D", "Blender", "RTX"],
+      "tags": ["3d", "positive"]
+    },
+    {
+      "id": "cap_014",
+      "category": "capability",
+      "question": "Is this good enough for just browsing the web?",
+      "context_device": "HP 15 Laptop",
+      "expected_capability": "web_browsing",
+      "expected_level": ["good", "moderate"],
+      "expected_answer_contains": ["yes", "browsing", "8GB"],
+      "tags": ["browsing", "positive"]
+    },
+    {
+      "id": "cap_015",
+      "category": "capability",
+      "question": "Can I use this for school work?",
+      "context_device": "HP 15 Laptop",
+      "expected_fields": ["good_for_school"],
+      "expected_answer_contains": ["yes", "school", "documents", "basic"],
+      "tags": ["school", "positive"]
+    },
+    {
+      "id": "copilot_001",
+      "category": "copilot",
+      "question": "Does this have Copilot features?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_fields": ["is_copilot_plus", "has_npu"],
+      "expected_answer_contains": ["yes", "Copilot"],
+      "tags": ["copilot", "positive"]
+    },
+    {
+      "id": "copilot_002",
+      "category": "copilot",
+      "question": "Is this a Copilot+ PC?",
+      "context_device": "HP 15 Laptop",
+      "expected_fields": ["is_copilot_plus"],
+      "expected_answer_contains": ["no"],
+      "tags": ["copilot", "negative"]
+    },
+    {
+      "id": "copilot_003",
+      "category": "copilot",
+      "question": "Can I use Recall on this device?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_fields": ["is_copilot_plus", "npu_tops"],
+      "expected_answer_contains": ["yes", "Recall"],
+      "tags": ["copilot", "recall"]
+    },
+    {
+      "id": "copilot_004",
+      "category": "copilot",
+      "question": "Does this support Windows Studio Effects?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_fields": ["is_copilot_plus"],
+      "expected_answer_contains": ["yes"],
+      "tags": ["copilot", "studio_effects"]
+    },
+    {
+      "id": "copilot_005",
+      "category": "copilot",
+      "question": "What AI features does this have?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_fields": ["is_copilot_plus", "npu_tops"],
+      "expected_answer_contains": ["AI"],
+      "tags": ["copilot", "ai_features"]
+    },
+    {
+      "id": "upgrade_001",
+      "category": "upgrade",
+      "question": "Can I upgrade the RAM in this laptop?",
+      "context_device": "HP 15 Laptop",
+      "expected_capability": "ram_upgrade",
+      "expected_answer_contains": ["RAM", "check"],
+      "tags": ["upgrade", "ram"]
+    },
+    {
+      "id": "upgrade_002",
+      "category": "upgrade",
+      "question": "Can I add a better graphics card?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_capability": "gpu_upgrade",
+      "expected_answer_contains": ["no", "laptop"],
+      "tags": ["upgrade", "gpu", "laptop"]
+    },
+    {
+      "id": "upgrade_003",
+      "category": "upgrade",
+      "question": "Can I upgrade the GPU on this desktop?",
+      "context_device": "HP All-in-One 27",
+      "expected_capability": "gpu_upgrade",
+      "expected_answer_contains": ["no", "cannot", "All-in-One"],
+      "tags": ["upgrade", "gpu", "aio"]
+    },
+    {
+      "id": "upgrade_004",
+      "category": "upgrade",
+      "question": "Can I add more storage?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_capability": "storage_upgrade",
+      "expected_answer_contains": ["storage", "SSD"],
+      "tags": ["upgrade", "storage"]
+    },
+    {
+      "id": "upgrade_005",
+      "category": "upgrade",
+      "question": "Can I use an external GPU with this?",
+      "context_device": "Dell Precision 5680",
+      "expected_fields": ["has_thunderbolt"],
+      "expected_answer_contains": ["Thunderbolt", "external"],
+      "tags": ["upgrade", "egpu"]
+    },
+    {
+      "id": "upgrade_006",
+      "category": "upgrade",
+      "question": "Can I connect an external GPU?",
+      "context_device": "HP 15 Laptop",
+      "expected_fields": ["has_thunderbolt"],
+      "expected_answer_contains": ["no", "Thunderbolt", "cannot"],
+      "tags": ["upgrade", "egpu", "negative"]
+    },
+    {
+      "id": "compare_001",
+      "category": "comparison",
+      "question": "Is this better than the ROG Strix for gaming?",
+      "context_device": "HP 15 Laptop",
+      "comparison_device": "ASUS ROG Strix G16",
+      "expected_answer_contains": ["ROG", "gaming"],
+      "tags": ["comparison", "gaming"]
+    },
+    {
+      "id": "compare_002",
+      "category": "comparison",
+      "question": "How does this compare to Surface Laptop for portability?",
+      "context_device": "ASUS ROG Strix G16",
+      "comparison_device": "Microsoft Surface Laptop 7",
+      "expected_answer_contains": ["Surface", "battery"],
+      "tags": ["comparison", "portability"]
+    },
+    {
+      "id": "compare_003",
+      "category": "comparison",
+      "question": "Which one has more RAM, this or the Dell Precision?",
+      "context_device": "HP 15 Laptop",
+      "comparison_device": "Dell Precision 5680",
+      "expected_answer_contains": ["Dell", "RAM"],
+      "tags": ["comparison", "ram"]
+    },
+    {
+      "id": "compare_004",
+      "category": "comparison",
+      "question": "Is this cheaper than the Surface Laptop?",
+      "context_device": "HP 15 Laptop",
+      "comparison_device": "Microsoft Surface Laptop 7",
+      "expected_answer_contains": ["cheaper", "price"],
+      "tags": ["comparison", "price"]
+    },
+    {
+      "id": "compare_005",
+      "category": "comparison",
+      "question": "Compare this with the Yoga for note-taking",
+      "context_device": "HP Pavilion x360 14",
+      "comparison_device": "Lenovo Yoga 7i 2-in-1",
+      "expected_answer_contains": ["2-in-1", "touch"],
+      "tags": ["comparison", "features"]
+    },
+    {
+      "id": "compare_006",
+      "category": "comparison",
+      "question": "Which is better for video editing, this or the workstation?",
+      "context_device": "ASUS ROG Strix G16",
+      "comparison_device": "Dell Precision 5680",
+      "expected_answer_contains": ["Dell", "32GB"],
+      "tags": ["comparison", "video_editing"]
+    },
+    {
+      "id": "compare_007",
+      "category": "comparison",
+      "question": "Should I get this or the HP Pavilion for school?",
+      "context_device": "HP 15 Laptop",
+      "comparison_device": "HP Pavilion x360 14",
+      "expected_answer_contains": ["Pavilion", "2-in-1"],
+      "tags": ["comparison", "school"]
+    },
+    {
+      "id": "compare_008",
+      "category": "comparison",
+      "question": "Which has better AI features?",
+      "context_device": "ASUS ROG Strix G16",
+      "comparison_device": "Microsoft Surface Laptop 7",
+      "expected_answer_contains": ["Surface", "NPU"],
+      "tags": ["comparison", "ai"]
+    },
+    {
+      "id": "usecase_001",
+      "category": "use_case",
+      "question": "What is this laptop best for?",
+      "context_device": "HP 15 Laptop",
+      "expected_fields": ["primary_activities"],
+      "expected_answer_contains": ["basic", "school", "web", "browsing", "documents"],
+      "tags": ["use_case", "general"]
+    },
+    {
+      "id": "usecase_002",
+      "category": "use_case",
+      "question": "What can I do with this device?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_fields": ["primary_activities"],
+      "expected_answer_contains": ["gaming", "video editing", "streaming", "content creation"],
+      "tags": ["use_case", "general"]
+    },
+    {
+      "id": "usecase_003",
+      "category": "use_case",
+      "question": "Is this good for a family computer?",
+      "context_device": "HP All-in-One 27",
+      "expected_fields": ["good_for_family"],
+      "expected_answer_contains": ["yes", "family", "27 inch", "touchscreen"],
+      "tags": ["use_case", "family"]
+    },
+    {
+      "id": "usecase_004",
+      "category": "use_case",
+      "question": "Can I use this for both work and entertainment?",
+      "context_device": "Lenovo Yoga 7i 2-in-1",
+      "expected_fields": ["primary_activities"],
+      "expected_answer_contains": ["yes", "work", "entertainment", "versatile"],
+      "tags": ["use_case", "multi"]
+    },
+    {
+      "id": "usecase_005",
+      "category": "use_case",
+      "question": "Is this suitable for a college student?",
+      "context_device": "Microsoft Surface Laptop 7",
+      "expected_answer_contains": ["yes", "portable", "battery", "student"],
+      "tags": ["use_case", "student"]
+    },
+    {
+      "id": "feature_001",
+      "category": "feature",
+      "question": "Does this have Windows Hello?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["has_windows_hello"],
+      "expected_answer_contains": ["yes", "Windows Hello", "facial", "fingerprint"],
+      "tags": ["feature", "security"]
+    },
+    {
+      "id": "feature_002",
+      "category": "feature",
+      "question": "Can I use a stylus with this?",
+      "context_device": "Lenovo Yoga 7i 2-in-1",
+      "expected_fields": ["supports_pen"],
+      "expected_answer_contains": ["yes", "pen", "stylus", "Ink"],
+      "tags": ["feature", "pen"]
+    },
+    {
+      "id": "feature_003",
+      "category": "feature",
+      "question": "Does this have a fingerprint reader?",
+      "context_device": "Dell Precision 5680",
+      "expected_fields": ["has_fingerprint"],
+      "expected_answer_contains": ["fingerprint"],
+      "tags": ["feature", "security"]
+    },
+    {
+      "id": "feature_004",
+      "category": "feature",
+      "question": "Can I connect to 4G/5G networks?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["has_sim", "has_esim"],
+      "expected_answer_contains": ["no", "cellular"],
+      "tags": ["feature", "connectivity"]
+    },
+    {
+      "id": "feature_005",
+      "category": "feature",
+      "question": "Is the display OLED?",
+      "context_device": "Lenovo Yoga 7i 2-in-1",
+      "expected_fields": ["resolution_type"],
+      "expected_answer_contains": ["OLED"],
+      "tags": ["feature", "display"]
+    },
+    {
+      "id": "out_001",
+      "category": "out_of_scope",
+      "question": "How does this compare to a MacBook Pro?",
+      "context_device": "Dell Precision 5680",
+      "expected_answer_contains": ["cannot", "Windows"],
+      "tags": ["out_of_scope", "mac"]
+    },
+    {
+      "id": "out_002",
+      "category": "out_of_scope",
+      "question": "Can I install macOS on this?",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["Windows", "cannot", "don't have information"],
+      "tags": ["out_of_scope", "mac"]
+    },
+    {
+      "id": "out_003",
+      "category": "out_of_scope",
+      "question": "What's the weather like today?",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["device", "specifications", "cannot answer", "only"],
+      "tags": ["out_of_scope", "unrelated"]
+    },
+    {
+      "id": "out_004",
+      "category": "out_of_scope",
+      "question": "Tell me about iPhone 15",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["don't have", "only Windows", "PC", "not in database"],
+      "tags": ["out_of_scope", "phone"]
+    },
+    {
+      "id": "out_005",
+      "category": "out_of_scope",
+      "question": "Compare this with a Samsung Galaxy tablet",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["don't have", "only", "cannot compare", "Windows PC"],
+      "tags": ["out_of_scope", "tablet"]
+    },
+    {
+      "id": "out_006",
+      "category": "out_of_scope",
+      "question": "Should I buy Apple stock?",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["device", "specifications", "cannot", "only"],
+      "tags": ["out_of_scope", "financial"]
+    },
+    {
+      "id": "edge_001",
+      "category": "edge_case",
+      "question": "What's the RAM?",
+      "context_device": "HP Pavilion x360 14",
+      "expected_fields": ["ram_gb"],
+      "expected_answer_contains": ["16", "GB"],
+      "tags": ["edge", "terse_question"]
+    },
+    {
+      "id": "edge_002",
+      "category": "edge_case",
+      "question": "Games?",
+      "context_device": "ASUS ROG Strix G16",
+      "expected_answer_contains": ["gaming", "RTX"],
+      "tags": ["edge", "minimal_question"]
+    },
+    {
+      "id": "edge_003",
+      "category": "edge_case",
+      "question": "Can I do EVERYTHING on this laptop?",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["basic", "limited", "not", "heavy"],
+      "tags": ["edge", "exaggerated"]
+    },
+    {
+      "id": "edge_004",
+      "category": "edge_case",
+      "question": "Is 8GB RAM enough in 2026?",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["basic", "limited", "multitasking", "consider"],
+      "tags": ["edge", "year_specific"]
+    },
+    {
+      "id": "edge_005",
+      "category": "edge_case",
+      "question": "Why doesn't this have a dedicated GPU?",
+      "context_device": "HP 15 Laptop",
+      "expected_answer_contains": ["integrated", "GPU"],
+      "tags": ["edge", "why_question"]
+    }
+  ],
+  "evaluation_metrics": {
+    "accuracy": "Percentage of test cases where expected_answer_contains words are present",
+    "retrieval_recall": "Percentage of test cases where correct device was retrieved",
+    "refusal_rate": "Percentage of out_of_scope questions correctly refused",
+    "capability_accuracy": "Percentage of capability questions with correct level assessment"
+  },
+  "category_counts": {
+    "spec_lookup": 10,
+    "capability": 15,
+    "copilot": 5,
+    "upgrade": 6,
+    "comparison": 8,
+    "use_case": 5,
+    "feature": 5,
+    "out_of_scope": 6,
+    "edge_case": 5
+  }
+}

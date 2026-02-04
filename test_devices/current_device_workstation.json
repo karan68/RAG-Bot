@@ -1,0 +1,61 @@
+{
+  "device": {
+    "SKUID": "TEST-WORK-001",
+    "DeviceName": "Dell Precision 5680",
+    "Brand": "Dell",
+    "Category": "Laptops",
+    "OS": "Windows 11 Pro",
+    "Specification": {
+      "CPU": "Intel Core i9-13900H",
+      "CPUFamily": "Intel Core i9",
+      "Memory": "32 GB",
+      "InternalMemoryType": "DDR5",
+      "Storage": "1 TB",
+      "StorageMedia": "SSD",
+      "ScreenSize": "16 inch",
+      "GPU": "Intel UHD Graphics",
+      "dGPU": "NVIDIA RTX 3500 Ada",
+      "HasGPU": "Yes",
+      "HasdGPU": "Yes",
+      "BatteryLife": "Up to 8 hours",
+      "HDMIPorts": "1",
+      "USBPorts": "4",
+      "USB30APorts": "1",
+      "USB30CPorts": "2",
+      "ThunderboltPorts": "2",
+      "Touchscreen": "No",
+      "FingerprintReader": "Yes",
+      "NGAINPU": "",
+      "HDtype": "OLED",
+      "Has4K": "Yes"
+    },
+    "Feature": ["Hello", "Security", "LargerDisplay", "LotsOfStorage"],
+    "PrimaryActivities": ["work", "creating", "photovideoediting", "multitasking"],
+    "IsNPU": "N",
+    "Description": "A professional mobile workstation with NVIDIA RTX professional graphics for CAD, 3D rendering, and data science.",
+    "HardCodedPrice": "$2,899.99",
+    "PriceRange": {
+      "MinPrice": "2499",
+      "MaxPrice": "3499"
+    },
+    "YesRAM": "32GB DDR5 RAM handles professional workloads",
+    "NoRAM": "",
+    "YesProcessor": "Intel Core i9 delivers workstation-class performance",
+    "NoProcessor": "",
+    "YesNPU": "",
+    "NoNPU": "No dedicated NPU"
+  },
+  "test_scenarios": [
+    "Can I run AutoCAD and SolidWorks?",
+    "Is this good for machine learning?",
+    "Can I edit 4K video professionally?",
+    "Is this overkill for just Office work?",
+    "Can I connect multiple monitors?"
+  ],
+  "expected_responses": {
+    "cad": "Excellent - RTX 3500 Ada is certified for CAD/3D applications, 32GB RAM handles large assemblies",
+    "ml": "Good - RTX 3500 Ada provides CUDA cores for ML training, but desktop GPUs would be faster",
+    "video_4k": "Yes - 4K OLED display, 32GB RAM, and professional GPU handle 4K video editing workflows",
+    "best_for": "CAD, 3D modeling, video production, data science, professional creative work"
+  }
+}

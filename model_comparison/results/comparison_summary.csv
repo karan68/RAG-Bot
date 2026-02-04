@@ -1,0 +1,6 @@
+Model,Size_GB,Pass_Rate,Avg_Time_Sec,Memory_GB
+Qwen 2.5 1.5B,0.9,0.900,1.41,4.93
+Phi-3.5 Mini,2.4,0.900,6.86,3.77
+TinyLlama 1.1B,0.64,0.700,1.41,5.63
+Phi-3 Mini,2.0,0.000,0.00,3.77
+Qwen 2.5 0.5B,0.35,0.000,0.00,5.64

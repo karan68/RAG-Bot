@@ -1,0 +1,860 @@
+{
+  "timestamp": "2026-02-04T21:56:29.605393",
+  "results": [
+    {
+      "model_name": "phi3.5",
+      "display_name": "Phi-3.5 Mini",
+      "model_size_gb": 2.4,
+      "total_tests": 10,
+      "passed": 9,
+      "failed": 1,
+      "pass_rate": 0.9,
+      "avg_response_time": 6.859868001937866,
+      "total_time": 68.59868001937866,
+      "avg_memory_gb": 3.7702610015869142,
+      "tests": [
+        {
+          "query_id": "spec_simple",
+          "question": "How much RAM does this device have?",
+          "category": "spec_lookup",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 has 16 GB of RAM.",
+          "elapsed_seconds": 8.114827632904053,
+          "memory_before_gb": 0.17330551147460938,
+          "memory_after_gb": 3.7688827514648438,
+          "error": null,
+          "matches": [
+            "16",
+            "GB"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "spec_gpu",
+          "question": "What graphics card does this have?",
+          "category": "spec_lookup",
+          "success": true,
+          "answer": "This ASUS ROG Strix G16 laptop is equipped with an Intel UHD Graphics integrated GPU and a dedicated NVIDIA GeForce RTX 4060.",
+          "elapsed_seconds": 1.6780471801757812,
+          "memory_before_gb": 3.7689247131347656,
+          "memory_after_gb": 3.7695236206054688,
+          "error": null,
+          "matches": [
+            "RTX",
+            "4060"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "capability_gaming",
+          "question": "Can I play AAA games on this?",
+          "category": "capability",
+          "success": true,
+          "answer": "Yes, the ASUS ROG Strix G16 with its Intel UHD Graphics and NVIDIA GeForce RTX 4060 dedicated GPU should be capable of running most modern AAA titles at acceptable settings. However, performance may vary depending on specific game requirements.",
+          "elapsed_seconds": 2.2378811836242676,
+          "memory_before_gb": 3.769512176513672,
+          "memory_after_gb": 3.768909454345703,
+          "error": null,
+          "matches": [
+            "yes"
+          ],
+          "misses": [
+            "gaming"
+          ],
+          "accuracy": 0.5,
+          "passed": true
+        },
+        {
+          "query_id": "capability_negative",
+          "question": "Is this good for gaming?",
+          "category": "capability",
+          "success": true,
+          "answer": "No, the HP 15 Laptop with an Intel Core i3-1215U processor and integrated Intel UHD Graphics is not ideal for gaming. It lacks a dedicated graphics card necessary for high performance in games. Additionally, its GPU may struggle to handle demanding titles smoothly.",
+          "elapsed_seconds": 10.932929754257202,
+          "memory_before_gb": 3.7688827514648438,
+          "memory_after_gb": 3.767974853515625,
+          "error": null,
+          "matches": [
+            "not"
+          ],
+          "misses": [
+            "limited"
+          ],
+          "accuracy": 0.5,
+          "passed": true
+        },
+        {
+          "query_id": "copilot_check",
+          "question": "Does this have Copilot features?",
+          "category": "copilot",
+          "success": true,
+          "answer": "Yes, the Microsoft Surface Laptop 7 is a Copilot+ PC and includes Copilot features. It has an NPU (Neural Processing Unit) with up to 45 TOPS for processing AI tasks efficiently within its ecosystem. This integration allows it to leverage advanced machine learning capabilities directly on the device, enhancing user experience through intelligent functions like predictive typing and photo organization.",
+          "elapsed_seconds": 5.869976043701172,
+          "memory_before_gb": 3.7679481506347656,
+          "memory_after_gb": 3.7690658569335938,
+          "error": null,
+          "matches": [
+            "Copilot"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "upgrade_ram",
+          "question": "Can I upgrade the RAM?",
+          "category": "upgrade",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 typically comes with a soldered-in memory module, making onboard upgrades uncommon. However, some models may offer user-upgradable options; it's best to check the specific laptop model details or consult the manufacturer for confirmation regarding RAM upgrades.",
+          "elapsed_seconds": 4.807780981063843,
+          "memory_before_gb": 3.7690696716308594,
+          "memory_after_gb": 3.770549774169922,
+          "error": null,
+          "matches": [
+            "RAM"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "comparison",
+          "question": "How does this compare to a budget laptop for gaming?",
+          "category": "comparison",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16, with its high-end Intel Core i7 processor and NVIDIA GeForce RTX 4060 dedicated GPU, is significantly more powerful than typical budget laptops designed for gaming. It offers superior performance but at a higher price point compared to entry-level or midrange options that usually come without such advanced hardware specifications. Additionally, its battery life of up to 5 hours suggests it' extraneous power consumption and cooling requirements not found in most budget models.",
+          "elapsed_seconds": 5.062523365020752,
+          "memory_before_gb": 3.7696533203125,
+          "memory_after_gb": 3.770885467529297,
+          "error": null,
+          "matches": [
+            "gaming",
+            "GPU"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "out_of_scope",
+          "question": "What's the weather like today?",
+          "category": "out_of_scope",
+          "success": true,
+          "answer": "The question about today' extraneous and cannot be answered based on device specifications. The ASUS ROG Strix G16 has an Intel Core i7-13650HX processor, with integrated NVIDIA GeForce RTX 4060 graphics for gaming performance, along with other specs like RAM, storage options, and battery life but does not provide information about the weather.",
+          "elapsed_seconds": 3.807783365249634,
+          "memory_before_gb": 3.770885467529297,
+          "memory_after_gb": 3.771495819091797,
+          "error": null,
+          "matches": [
+            "cannot",
+            "device",
+            "specification"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "complex_reasoning",
+          "question": "Is this laptop suitable for a computer science student who wants to run virtual machines and do some light gaming?",
+          "category": "complex",
+          "success": true,
+          "answer": "Yes, the ASUS ROG Strix G16 is well-suified with an Intel Core i7 processor capable of handling demanding tasks like running multiple virtual machines. However, its integrated graphics may not be sufficient for high-end gaming; thus, it's more suitable for light to moderate gaming and multitasking in a computer science environment.",
+          "elapsed_seconds": 20.601685285568237,
+          "memory_before_gb": 3.7714996337890625,
+          "memory_after_gb": 3.7723159790039062,
+          "error": null,
+          "matches": [],
+          "misses": [
+            "RAM",
+            "VM"
+          ],
+          "accuracy": 0.0,
+          "passed": false
+        },
+        {
+          "query_id": "brief_answer",
+          "question": "Games?",
+          "category": "edge_case",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16, with its powerful Intel Core i7-13650HX processor and NVIDIA GeForce RTX 4060 dedicated GPU, is well-sudependent for gaming. It can handle high-end games smoothly due to the combination of a strong CPU and advanced graphics card. Additionally, with up to 5 hours of battery life on offer (depending on usage), it provides reasonable portability between sessions or while traveling.",
+          "elapsed_seconds": 5.485245227813721,
+          "memory_before_gb": 3.772319793701172,
+          "memory_after_gb": 3.7730064392089844,
+          "error": null,
+          "matches": [
+            "gaming"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "model_name": "phi3",
+      "display_name": "Phi-3 Mini",
+      "model_size_gb": 2.0,
+      "total_tests": 10,
+      "passed": 0,
+      "failed": 10,
+      "pass_rate": 0.0,
+      "avg_response_time": 0.004456877708435059,
+      "total_time": 0.044568777084350586,
+      "avg_memory_gb": 3.7730587005615233,
+      "tests": [
+        {
+          "query_id": "spec_simple",
+          "question": "How much RAM does this device have?",
+          "category": "spec_lookup",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.0039827823638916016,
+          "memory_before_gb": 3.7729721069335938,
+          "memory_after_gb": 3.7729873657226562,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "spec_gpu",
+          "question": "What graphics card does this have?",
+          "category": "spec_lookup",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004683256149291992,
+          "memory_before_gb": 3.7729873657226562,
+          "memory_after_gb": 3.7730026245117188,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "capability_gaming",
+          "question": "Can I play AAA games on this?",
+          "category": "capability",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.005832672119140625,
+          "memory_before_gb": 3.772991180419922,
+          "memory_after_gb": 3.773021697998047,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "capability_negative",
+          "question": "Is this good for gaming?",
+          "category": "capability",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.007454633712768555,
+          "memory_before_gb": 3.77301025390625,
+          "memory_after_gb": 3.7730369567871094,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "copilot_check",
+          "question": "Does this have Copilot features?",
+          "category": "copilot",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004117012023925781,
+          "memory_before_gb": 3.7730255126953125,
+          "memory_after_gb": 3.7730484008789062,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "upgrade_ram",
+          "question": "Can I upgrade the RAM?",
+          "category": "upgrade",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.003506898880004883,
+          "memory_before_gb": 3.773040771484375,
+          "memory_after_gb": 3.7730789184570312,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "comparison",
+          "question": "How does this compare to a budget laptop for gaming?",
+          "category": "comparison",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004012346267700195,
+          "memory_before_gb": 3.7730712890625,
+          "memory_after_gb": 3.7730941772460938,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "out_of_scope",
+          "question": "What's the weather like today?",
+          "category": "out_of_scope",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004091978073120117,
+          "memory_before_gb": 3.773082733154297,
+          "memory_after_gb": 3.773090362548828,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "complex_reasoning",
+          "question": "Is this laptop suitable for a computer science student who wants to run virtual machines and do some light gaming?",
+          "category": "complex",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.0037848949432373047,
+          "memory_before_gb": 3.773082733154297,
+          "memory_after_gb": 3.773120880126953,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "brief_answer",
+          "question": "Games?",
+          "category": "edge_case",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.0031023025512695312,
+          "memory_before_gb": 3.773082733154297,
+          "memory_after_gb": 3.7731056213378906,
+          "error": "model 'phi3' not found (status code: 404)",
+          "passed": false
+        }
+      ]
+    },
+    {
+      "model_name": "qwen2.5:1.5b",
+      "display_name": "Qwen 2.5 1.5B",
+      "model_size_gb": 0.9,
+      "total_tests": 10,
+      "passed": 9,
+      "failed": 1,
+      "pass_rate": 0.9,
+      "avg_response_time": 1.4124166011810302,
+      "total_time": 14.124166011810303,
+      "avg_memory_gb": 4.934607315063476,
+      "tests": [
+        {
+          "query_id": "spec_simple",
+          "question": "How much RAM does this device have?",
+          "category": "spec_lookup",
+          "success": true,
+          "answer": "This device has 16 GB of RAM.",
+          "elapsed_seconds": 2.4676618576049805,
+          "memory_before_gb": 3.7704391479492188,
+          "memory_after_gb": 4.926048278808594,
+          "error": null,
+          "matches": [
+            "16",
+            "GB"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "spec_gpu",
+          "question": "What graphics card does this have?",
+          "category": "spec_lookup",
+          "success": true,
+          "answer": "This laptop has an integrated Intel UHD Graphics, but it also features a dedicated NVIDIA GeForce RTX 4060.",
+          "elapsed_seconds": 0.6837818622589111,
+          "memory_before_gb": 4.925865173339844,
+          "memory_after_gb": 4.928493499755859,
+          "error": null,
+          "matches": [
+            "RTX",
+            "4060"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "capability_gaming",
+          "question": "Can I play AAA games on this?",
+          "category": "capability",
+          "success": true,
+          "answer": "Yes, you can play AAA (Advanced Game) games on this laptop. It has an Intel Core i7-13650HX processor and NVIDIA GeForce RTX 4060 dedicated GPU, which should handle most modern AAA titles smoothly. The combination of these components ensures good performance for gaming tasks.",
+          "elapsed_seconds": 1.3478288650512695,
+          "memory_before_gb": 4.928493499755859,
+          "memory_after_gb": 4.929347991943359,
+          "error": null,
+          "matches": [
+            "yes",
+            "gaming"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "capability_negative",
+          "question": "Is this good for gaming?",
+          "category": "capability",
+          "success": true,
+          "answer": "This laptop is suitable for general computing tasks and light office work, but it may not be ideal for intensive gaming due to its lower graphics capabilities.",
+          "elapsed_seconds": 1.1329197883605957,
+          "memory_before_gb": 4.9293212890625,
+          "memory_after_gb": 4.934268951416016,
+          "error": null,
+          "matches": [
+            "not"
+          ],
+          "misses": [
+            "limited"
+          ],
+          "accuracy": 0.5,
+          "passed": true
+        },
+        {
+          "query_id": "copilot_check",
+          "question": "Does this have Copilot features?",
+          "category": "copilot",
+          "success": true,
+          "answer": "Yes, the Microsoft Surface Laptop 7 has Copilot+ PC features.",
+          "elapsed_seconds": 1.0273997783660889,
+          "memory_before_gb": 4.934272766113281,
+          "memory_after_gb": 4.933414459228516,
+          "error": null,
+          "matches": [
+            "Copilot"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "upgrade_ram",
+          "question": "Can I upgrade the RAM?",
+          "category": "upgrade",
+          "success": true,
+          "answer": "Yes, you can upgrade the RAM on your ASUS ROG Strix G16. The laptop supports upgradable RAM modules for additional performance and capacity.",
+          "elapsed_seconds": 1.305232048034668,
+          "memory_before_gb": 4.933414459228516,
+          "memory_after_gb": 4.934932708740234,
+          "error": null,
+          "matches": [
+            "RAM"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "comparison",
+          "question": "How does this compare to a budget laptop for gaming?",
+          "category": "comparison",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 is an entry-level gaming laptop with a powerful Intel Core i7 processor and ample RAM, offering excellent performance suitable for most gaming needs. In comparison, a budget laptop might lack the dedicated graphics card or have less storage capacity, but still provides sufficient computing power for basic gaming tasks.",
+          "elapsed_seconds": 1.3488430976867676,
+          "memory_before_gb": 4.934898376464844,
+          "memory_after_gb": 4.937187194824219,
+          "error": null,
+          "matches": [
+            "gaming"
+          ],
+          "misses": [
+            "GPU"
+          ],
+          "accuracy": 0.5,
+          "passed": true
+        },
+        {
+          "query_id": "out_of_scope",
+          "question": "What's the weather like today?",
+          "category": "out_of_scope",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 is a high-performance laptop with an Intel Core i7-13650HX processor, 16 GB of RAM, and NVIDIA GeForce RTX 4060 dedicated graphics. It has a battery capacity up to 5 hours.",
+          "elapsed_seconds": 1.2389862537384033,
+          "memory_before_gb": 4.937126159667969,
+          "memory_after_gb": 4.939373016357422,
+          "error": null,
+          "matches": [],
+          "misses": [
+            "cannot",
+            "device",
+            "specification"
+          ],
+          "accuracy": 0.0,
+          "passed": false
+        },
+        {
+          "query_id": "complex_reasoning",
+          "question": "Is this laptop suitable for a computer science student who wants to run virtual machines and do some light gaming?",
+          "category": "complex",
+          "success": true,
+          "answer": "Yes, the ASUS ROG Strix G16 is suitable for a computer science student looking to run virtual machines and engage in light gaming. It has an Intel Core i7-13650HX processor, 16 GB of RAM, and NVIDIA GeForce RTX 4060 dedicated GPU, which should handle most academic tasks and basic gaming needs efficiently. The laptop also includes a 512 GB storage option with up to 5 hours of battery life, providing ample performance for the student's requirements while maintaining good balance in power consumption.",
+          "elapsed_seconds": 2.2948975563049316,
+          "memory_before_gb": 4.9393310546875,
+          "memory_after_gb": 4.94122314453125,
+          "error": null,
+          "matches": [
+            "RAM"
+          ],
+          "misses": [
+            "VM"
+          ],
+          "accuracy": 0.5,
+          "passed": true
+        },
+        {
+          "query_id": "brief_answer",
+          "question": "Games?",
+          "category": "edge_case",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 is a high-performance gaming laptop with an Intel Core i7-13650HX processor, 16 GB of RAM, and NVIDIA GeForce RTX 4060 dedicated graphics. It has up to 5 hours of battery life, making it suitable for playing demanding games.",
+          "elapsed_seconds": 1.2766149044036865,
+          "memory_before_gb": 4.941188812255859,
+          "memory_after_gb": 4.941783905029297,
+          "error": null,
+          "matches": [
+            "gaming"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "model_name": "tinyllama",
+      "display_name": "TinyLlama 1.1B",
+      "model_size_gb": 0.64,
+      "total_tests": 10,
+      "passed": 7,
+      "failed": 3,
+      "pass_rate": 0.7,
+      "avg_response_time": 1.4103221654891969,
+      "total_time": 14.103221654891968,
+      "avg_memory_gb": 5.633372497558594,
+      "tests": [
+        {
+          "query_id": "spec_simple",
+          "question": "How much RAM does this device have?",
+          "category": "spec_lookup",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 laptop has a dedicated GPU (NVIDIA GeForce RTX 4060) and up to 5 hours of battery life. The device's total RAM capacity is 16 GB, which is sufficient for most modern applications and gaming sessions.",
+          "elapsed_seconds": 2.345755100250244,
+          "memory_before_gb": 4.941192626953125,
+          "memory_after_gb": 5.632320404052734,
+          "error": null,
+          "matches": [
+            "16",
+            "GB"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "spec_gpu",
+          "question": "What graphics card does this have?",
+          "category": "spec_lookup",
+          "success": true,
+          "answer": "The answer is: NVIDIA GeForce RTX 4060.",
+          "elapsed_seconds": 0.3839871883392334,
+          "memory_before_gb": 5.632320404052734,
+          "memory_after_gb": 5.632816314697266,
+          "error": null,
+          "matches": [
+            "RTX",
+            "4060"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "capability_gaming",
+          "question": "Can I play AAA games on this?",
+          "category": "capability",
+          "success": true,
+          "answer": "Yes, the ASUS ROG Strix G16 is designed to support high-performance gaming and can handle AAA games with ease. With its powerful processor, graphics card, and RAM, it's capable of running demanding games at high resolutions and frame rates without any issues. The device's battery life is also sufficient for gaming sessions, making it a great choice for gamers who want to enjoy their favorite titles without having to worry about running out of power mid-game.",
+          "elapsed_seconds": 1.2763676643371582,
+          "memory_before_gb": 5.632701873779297,
+          "memory_after_gb": 5.6330718994140625,
+          "error": null,
+          "matches": [
+            "yes",
+            "gaming"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "capability_negative",
+          "question": "Is this good for gaming?",
+          "category": "capability",
+          "success": true,
+          "answer": "Yes, based on the device data provided, this HP 15 Laptop is suitable for gaming. The Intel Core i3-1215U processor and up to 8 GB of RAM are powerful enough to handle demanding games, while the Intel UHD Graphics GPU provides smooth gameplay with minimal lag. Additionally, the laptop has a battery life of up to 7 hours, which should be sufficient for prolonged gaming sessions. Overall, this HP 15 Laptop is an excellent choice for gamers looking for a powerful and reliable device.",
+          "elapsed_seconds": 1.9188034534454346,
+          "memory_before_gb": 5.633056640625,
+          "memory_after_gb": 5.634029388427734,
+          "error": null,
+          "matches": [],
+          "misses": [
+            "not",
+            "limited"
+          ],
+          "accuracy": 0.0,
+          "passed": false
+        },
+        {
+          "query_id": "copilot_check",
+          "question": "Does this have Copilot features?",
+          "category": "copilot",
+          "success": true,
+          "answer": "Yes, this device has Copilot features. Copilo is a feature that allows users to access and manage their Windows devices from a remote location using a computer or mobile device. The specifications listed for this device include Copilo+ PC, which refers to the software application that comes with the device. This feature enables users to control and monitor their Surface laptop remotely, providing additional security and convenience.",
+          "elapsed_seconds": 1.5230350494384766,
+          "memory_before_gb": 5.634029388427734,
+          "memory_after_gb": 5.630268096923828,
+          "error": null,
+          "matches": [
+            "Copilot"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "upgrade_ram",
+          "question": "Can I upgrade the RAM?",
+          "category": "upgrade",
+          "success": true,
+          "answer": "Yes, you can upgrade the RAM in your ASUS ROG Strix G16 device. The device has a maximum of 5 GB of RAM and supports up to 32GB of DDR4 memory. However, the exact number of slots available for upgrading will depend on your specific model and manufacturer. It is recommended to consult the product manual or contact the manufacturer's support team for more information on RAM upgrade options.",
+          "elapsed_seconds": 1.704188585281372,
+          "memory_before_gb": 5.630268096923828,
+          "memory_after_gb": 5.632774353027344,
+          "error": null,
+          "matches": [
+            "RAM"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "comparison",
+          "question": "How does this compare to a budget laptop for gaming?",
+          "category": "comparison",
+          "success": true,
+          "answer": "The ASUS ROG Strix G16 is a better choice than a budget laptop for gamers due to its powerful processor, high-end graphics card, and dedicated GPU. It offers more power and performance than a typical budget laptop, making it ideal for gaming and other demanding tasks. The ASUS ROG Strix G16's higher specifications and better hardware make it a more reliable and durable option compared to a regular laptop.",
+          "elapsed_seconds": 1.1754724979400635,
+          "memory_before_gb": 5.632774353027344,
+          "memory_after_gb": 5.632755279541016,
+          "error": null,
+          "matches": [
+            "gaming",
+            "GPU"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        },
+        {
+          "query_id": "out_of_scope",
+          "question": "What's the weather like today?",
+          "category": "out_of_scope",
+          "success": true,
+          "answer": "The weather is expected to be cloudy with a chance of rain, according to the device data provided. The ASUS ROG Strix G16 is equipped with an Intel Core i7-13650HX processor, 16 GB of RAM, a 512 GB SSD, and a NVIDIA GeForce RTX 4060 GPU. The device's battery capacity is up to 5 hours, which may be affected by the weather conditions.",
+          "elapsed_seconds": 1.3141400814056396,
+          "memory_before_gb": 5.632720947265625,
+          "memory_after_gb": 5.635383605957031,
+          "error": null,
+          "matches": [
+            "device"
+          ],
+          "misses": [
+            "cannot",
+            "specification"
+          ],
+          "accuracy": 0.3333333333333333,
+          "passed": false
+        },
+        {
+          "query_id": "complex_reasoning",
+          "question": "Is this laptop suitable for a computer science student who wants to run virtual machines and do some light gaming?",
+          "category": "complex",
+          "success": true,
+          "answer": "Yes, based on the device data provided, this laptop is suitable for a computer science student who wants to run virtual machines and do some light gaming. The laptop has a dedicated graphics card, which is capable of handling virtual machine operations and light gaming, making it an ideal choice for students studying computer science or related fields.",
+          "elapsed_seconds": 0.9583115577697754,
+          "memory_before_gb": 5.635345458984375,
+          "memory_after_gb": 5.635112762451172,
+          "error": null,
+          "matches": [],
+          "misses": [
+            "RAM",
+            "VM"
+          ],
+          "accuracy": 0.0,
+          "passed": false
+        },
+        {
+          "query_id": "brief_answer",
+          "question": "Games?",
+          "category": "edge_case",
+          "success": true,
+          "answer": "Yes, the ASUS ROG Strix G16 is a great choice for gaming and has dedicated graphics cards. The device's processor, Intel Core i7-13650HX, is powerful enough to handle demanding games and applications with ease. Additionally, the laptop comes equipped with an NVIDIA GeForce RTX 4060, which provides excellent graphics performance for playing high-quality games and other multimedia content. The device's battery life of up to 5 hours also makes it a great choice for long gaming sessions or traveling.",
+          "elapsed_seconds": 1.5031604766845703,
+          "memory_before_gb": 5.635112762451172,
+          "memory_after_gb": 5.63519287109375,
+          "error": null,
+          "matches": [
+            "gaming"
+          ],
+          "misses": [],
+          "accuracy": 1.0,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "model_name": "qwen2.5:0.5b",
+      "display_name": "Qwen 2.5 0.5B",
+      "model_size_gb": 0.35,
+      "total_tests": 10,
+      "passed": 0,
+      "failed": 10,
+      "pass_rate": 0.0,
+      "avg_response_time": 0.004622435569763184,
+      "total_time": 0.046224355697631836,
+      "avg_memory_gb": 5.635295486450195,
+      "tests": [
+        {
+          "query_id": "spec_simple",
+          "question": "How much RAM does this device have?",
+          "category": "spec_lookup",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.0033469200134277344,
+          "memory_before_gb": 5.635200500488281,
+          "memory_after_gb": 5.635204315185547,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "spec_gpu",
+          "question": "What graphics card does this have?",
+          "category": "spec_lookup",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.006365060806274414,
+          "memory_before_gb": 5.63531494140625,
+          "memory_after_gb": 5.63531494140625,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "capability_gaming",
+          "question": "Can I play AAA games on this?",
+          "category": "capability",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004604339599609375,
+          "memory_before_gb": 5.63531494140625,
+          "memory_after_gb": 5.63531494140625,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "capability_negative",
+          "question": "Is this good for gaming?",
+          "category": "capability",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.0035860538482666016,
+          "memory_before_gb": 5.635295867919922,
+          "memory_after_gb": 5.635295867919922,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "copilot_check",
+          "question": "Does this have Copilot features?",
+          "category": "copilot",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.00474238395690918,
+          "memory_before_gb": 5.635295867919922,
+          "memory_after_gb": 5.635295867919922,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "upgrade_ram",
+          "question": "Can I upgrade the RAM?",
+          "category": "upgrade",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004173755645751953,
+          "memory_before_gb": 5.635307312011719,
+          "memory_after_gb": 5.635307312011719,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "comparison",
+          "question": "How does this compare to a budget laptop for gaming?",
+          "category": "comparison",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.003504514694213867,
+          "memory_before_gb": 5.635295867919922,
+          "memory_after_gb": 5.635295867919922,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "out_of_scope",
+          "question": "What's the weather like today?",
+          "category": "out_of_scope",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004729509353637695,
+          "memory_before_gb": 5.635307312011719,
+          "memory_after_gb": 5.635307312011719,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "complex_reasoning",
+          "question": "Is this laptop suitable for a computer science student who wants to run virtual machines and do some light gaming?",
+          "category": "complex",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.006476402282714844,
+          "memory_before_gb": 5.635307312011719,
+          "memory_after_gb": 5.635307312011719,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        },
+        {
+          "query_id": "brief_answer",
+          "question": "Games?",
+          "category": "edge_case",
+          "success": false,
+          "answer": "",
+          "elapsed_seconds": 0.004695415496826172,
+          "memory_before_gb": 5.635311126708984,
+          "memory_after_gb": 5.635311126708984,
+          "error": "model 'qwen2.5:0.5b' not found (status code: 404)",
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "recommendation": {
+    "best_quality": "qwen2.5:1.5b",
+    "best_lightweight": "qwen2.5:1.5b",
+    "best_balanced": "tinyllama"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "app": {
+    "name": "Device Specification Chatbot",
+    "version": "1.0.0",
+    "server_host": "127.0.0.1",
+    "server_port": 7860
+  },
+  "models": {
+    "llm": "qwen2.5:1.5b",
+    "embedding": "nomic-embed-text"
+  },
+  "llm_settings": {
+    "temperature": 0.2,
+    "max_tokens": 200,
+    "top_p": 0.9,
+    "stop_sequences": ["User Question:", "User:", "Question:", "Q:", "\n\nUser", "---"]
+  },
+  "paths": {
+    "data_dir": "data",
+    "chroma_db": "data/chroma_db",
+    "processed_devices": "data/processed_devices.json",
+    "device_documents": "data/device_documents.json",
+    "inference_rules": "inference_rules.json",
+    "test_devices": "test_devices",
+    "logs_dir": "logs"
+  },
+  "validation": {
+    "max_query_length": 500,
+    "min_query_length": 2,
+    "blocked_patterns": [
+      "ignore.*instruction",
+      "forget.*everything",
+      "you are now",
+      "pretend to be",
+      "act as if",
+      "disregard.*above"
+    ]
+  },
+  "retrieval": {
+    "top_k": 3,
+    "min_similarity": 0.3
+  }
+}

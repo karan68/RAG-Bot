@@ -1,0 +1,61 @@
+{
+  "device": {
+    "SKUID": "TEST-AIO-001",
+    "DeviceName": "HP All-in-One 27",
+    "Brand": "HP",
+    "Category": "Desktops and All-in-Ones",
+    "OS": "Windows 11 Home",
+    "Specification": {
+      "CPU": "AMD Ryzen 7 7730U",
+      "CPUFamily": "AMD Ryzen 7",
+      "Memory": "16 GB",
+      "InternalMemoryType": "DDR4",
+      "Storage": "1 TB",
+      "StorageMedia": "SSD",
+      "ScreenSize": "27 inch",
+      "GPU": "AMD Radeon Graphics",
+      "dGPU": "",
+      "HasGPU": "Yes",
+      "HasdGPU": "No",
+      "BatteryLife": "",
+      "HDMIPorts": "1",
+      "USBPorts": "6",
+      "USB30APorts": "4",
+      "USB30CPorts": "2",
+      "ThunderboltPorts": "0",
+      "Touchscreen": "Yes",
+      "FingerprintReader": "No",
+      "NGAINPU": "",
+      "HDtype": "FHD",
+      "Has4K": "No"
+    },
+    "Feature": ["Touch", "LargerDisplay", "LotsOfStorage"],
+    "PrimaryActivities": ["family", "entertainment", "work", "school", "multitasking"],
+    "IsNPU": "N",
+    "Description": "A space-saving all-in-one desktop with a 27-inch touchscreen, perfect for family use and home office.",
+    "HardCodedPrice": "$999.99",
+    "PriceRange": {
+      "MinPrice": "949",
+      "MaxPrice": "1099"
+    },
+    "YesRAM": "16GB RAM for smooth family multitasking",
+    "NoRAM": "",
+    "YesProcessor": "AMD Ryzen 7 delivers excellent everyday performance",
+    "NoProcessor": "",
+    "YesNPU": "",
+    "NoNPU": "No dedicated NPU"
+  },
+  "test_scenarios": [
+    "Can I add an external GPU?",
+    "Is this good for a home office?",
+    "Can multiple family members use this?",
+    "Can I upgrade the storage?",
+    "Is this good for video calls?"
+  ],
+  "expected_responses": {
+    "gpu_upgrade": "No - All-in-Ones typically don't support GPU upgrades, no Thunderbolt for eGPU",
+    "home_office": "Excellent - large 27-inch display, 1TB storage, good for productivity and video calls",
+    "family": "Great for families - big screen, touchscreen, multiple USB ports for peripherals",
+    "best_for": "Home office, family computing, entertainment, light creative work"
+  }
+}

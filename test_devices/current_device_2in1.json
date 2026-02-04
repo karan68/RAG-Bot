@@ -1,0 +1,61 @@
+{
+  "device": {
+    "SKUID": "TEST-2IN1-001",
+    "DeviceName": "Lenovo Yoga 7i 2-in-1",
+    "Brand": "Lenovo",
+    "Category": "2-in-1s",
+    "OS": "Windows 11 Home",
+    "Specification": {
+      "CPU": "Intel Core i5-1335U",
+      "CPUFamily": "Intel Core i5",
+      "Memory": "16 GB",
+      "InternalMemoryType": "LPDDR5",
+      "Storage": "512 GB",
+      "StorageMedia": "SSD",
+      "ScreenSize": "14 inch",
+      "GPU": "Intel Iris Xe Graphics",
+      "dGPU": "",
+      "HasGPU": "Yes",
+      "HasdGPU": "No",
+      "BatteryLife": "Up to 12 hours",
+      "HDMIPorts": "0",
+      "USBPorts": "3",
+      "USB30CPorts": "2",
+      "USB30APorts": "1",
+      "ThunderboltPorts": "1",
+      "Touchscreen": "Yes",
+      "FingerprintReader": "Yes",
+      "NGAINPU": "",
+      "HDtype": "OLED",
+      "Has4K": "No"
+    },
+    "Feature": ["Hello", "Touch", "Ink", "Portability", "Longbatterylife", "Security"],
+    "PrimaryActivities": ["work", "entertainment", "creating", "school", "multitasking"],
+    "IsNPU": "N",
+    "Description": "A versatile 2-in-1 laptop with OLED display, pen support, and 360-degree hinge for tablet mode.",
+    "HardCodedPrice": "$899.99",
+    "PriceRange": {
+      "MinPrice": "849",
+      "MaxPrice": "999"
+    },
+    "YesRAM": "16GB LPDDR5 RAM handles multitasking with ease",
+    "NoRAM": "",
+    "YesProcessor": "Intel Core i5 provides solid performance for everyday tasks",
+    "NoProcessor": "May not be ideal for heavy workloads",
+    "YesNPU": "",
+    "NoNPU": "No dedicated NPU"
+  },
+  "test_scenarios": [
+    "Can I use a pen with this?",
+    "Is this good for taking notes in class?",
+    "Can I edit photos on this?",
+    "What makes this different from a regular laptop?",
+    "Is the display good for creative work?"
+  ],
+  "expected_responses": {
+    "pen": "Yes - supports Ink/pen input for drawing and note-taking",
+    "notes": "Excellent - touchscreen, pen support, tablet mode, and 12-hour battery ideal for students",
+    "photo_editing": "Good for photo editing - OLED display with vibrant colors, Intel Iris Xe handles Lightroom/Photoshop",
+    "best_for": "Note-taking, presentations, light creative work, entertainment"
+  }
+}
