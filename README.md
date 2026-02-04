@@ -10,11 +10,12 @@ A **local, privacy-first AI chatbot** for Windows PC specifications. Ask questio
 
 - **🔒 100% Local & Private** - No data leaves your machine, no API keys needed
 - **💬 Natural Language Queries** - Ask questions in plain English
-- **📊 Device Comparisons** - Compare specs between different devices
+- **📊 Smart Device Comparisons** - Compare specs with fuzzy matching & graceful handling when devices aren't found
 - **🎮 Capability Assessment** - Check if a device can handle gaming, video editing, etc.
 - **🔄 Upgrade Recommendations** - Get advice on RAM, storage, and GPU upgrades
 - **🤖 Copilot+ Features** - Identify devices with NPU and Copilot+ capabilities
-- **⚡ Fast Responses** - ~6 second response time on average
+- **⚡ Fast Responses** - ~2 second response time on average
+- **🛡️ Anti-Hallucination** - Refuses to make up specs for devices not in database
 
 ## 🏗️ Architecture Overview
 
@@ -121,6 +122,23 @@ slm/
 | **Copilot+** | "Does this support Copilot+ features?" |
 | **Use Case** | "Is this suitable for programming?" |
 
+### Smart Comparison Handling
+
+The chatbot intelligently handles device comparisons:
+
+```
+✅ "Compare this with Dell XPS 15"
+   → Finds Dell XPS 15 in database, provides real comparison
+
+✅ "Compare this with ASUS TUF Gaming"  
+   → Fuzzy matches to "ASUS TUF Gaming A16", uses actual specs
+
+❌ "Compare this with Alienware x17 R3"
+   → "I don't have 'alienware x17 r3' in my database, so I can't compare..."
+```
+
+**No hallucinations** - if a device isn't in the database, it tells you instead of making up specs.
+
 ## 🧪 Running Tests
 
 ```bash
@@ -128,11 +146,10 @@ python tests/test_runner.py
 ```
 
 **Current Test Results:**
-- ✅ **86.2% Pass Rate** (56/65 tests)
-- ✅ **100%** on spec lookups
-- ✅ **100%** on out-of-scope handling
-- ✅ **87%** on capability assessment
-- ⏱️ **6.2s** average response time
+- ✅ **83% Pass Rate** (54/65 tests)
+- ✅ **100%** on spec lookups, out-of-scope, edge cases
+- ✅ **80%** on capability assessment
+- ⏱️ **~2s** average response time
 
 ## 🤔 Why RAG? Comparison with Alternatives
 
@@ -244,8 +261,8 @@ Query: "Can this laptop run Fortnite?"
 
 | Metric | Our RAG System |
 |--------|----------------|
-| Test Pass Rate | 86.2% |
-| Avg Response Time | 6.2 seconds |
+| Test Pass Rate | 83% |
+| Avg Response Time | ~2 seconds |
 | Model Size | 0.9 GB (Qwen 2.5 1.5B) |
 | Embedding Size | 274 MB (nomic-embed-text) |
 | Total Download | ~1.3 GB |
