@@ -94,6 +94,7 @@ class RAGPipeline:
         self.inference_engine = inference_engine
         self.llm_model = llm_model
         self.processed_devices = {}
+        self.device_brands = set()  # Extracted dynamically from database
         self.current_device = None
         self.conversation_history = []
         
@@ -110,6 +111,7 @@ class RAGPipeline:
             sku = device.get('sku_id', '')
             name = device.get('device_name', '').lower()
             title = device.get('title', '').lower()
+            brand = (device.get('brand') or device.get('Brand', '')).lower()
             
             if sku:
                 self.processed_devices[sku] = device
@@ -117,6 +119,23 @@ class RAGPipeline:
                 self.processed_devices[name] = device
             if title:
                 self.processed_devices[title] = device
+            
+            # Extract brand for dynamic brand list
+            if brand and len(brand) > 2 and not brand.replace('.', '').isdigit():
+                self.device_brands.add(brand)
+            
+            # Also extract first word of device name as potential brand/line
+            if name:
+                first_word = name.split()[0] if name.split() else ''
+                # Filter out numbers and short words
+                if first_word and len(first_word) > 2 and not first_word.replace('.', '').isdigit():
+                    self.device_brands.add(first_word)
+                # Extract model line (e.g., "dell xps" -> "xps", "hp pavilion" -> "pavilion")
+                words = name.split()
+                if len(words) >= 2:
+                    second_word = words[1]
+                    if len(second_word) > 2 and not second_word.replace('.', '').isdigit():
+                        self.device_brands.add(second_word)
         
         print(f"Indexed {len(devices)} devices for lookup")
     
@@ -153,29 +172,75 @@ class RAGPipeline:
         """Extract the name of the device being compared to from the query."""
         query_lower = query.lower()
         
-        # Patterns to extract the "other" device in comparison queries
-        # "compare X with Y" -> Y
-        # "X vs Y" -> Y
-        # "X versus Y" -> Y
-        # "compare X to Y" -> Y
-        # "difference between X and Y" -> Y
+        # Use dynamically extracted brands from database
+        device_brands = self.device_brands
         
+        # Patterns to extract the "other" device in comparison queries
+        # Order matters - more specific patterns first
         patterns = [
-            r'(?:compare|comparing)\s+.+?\s+(?:with|to|and)\s+(.+?)(?:\?|$|\.|for|in terms)',
-            r'(?:vs\.?|versus)\s+(.+?)(?:\?|$|\.|for|in terms)',
-            r'difference\s+between\s+.+?\s+and\s+(.+?)(?:\?|$|\.|for)',
-            r'better\s+than\s+(?:a\s+|the\s+)?(.+?)(?:\?|$|\.|for)',
-            r'worse\s+than\s+(?:a\s+|the\s+)?(.+?)(?:\?|$|\.|for)',
+            # "against DEVICE" - very common pattern
+            r'against\s+(?:the\s+|a\s+)?([a-z0-9][a-z0-9\s\-]+?)(?:\s+along|\s+for|\s+in\s+terms|\s+regarding|\?|$|\.)',
+            # "with DEVICE" 
+            r'(?:compare|comparing).*?(?:with|to)\s+(?:the\s+|a\s+)?([a-z0-9][a-z0-9\s\-]+?)(?:\s+along|\s+for|\s+in\s+terms|\s+regarding|\?|$|\.)',
+            # "vs DEVICE" or "versus DEVICE"
+            r'(?:vs\.?|versus)\s+(?:the\s+|a\s+)?([a-z0-9][a-z0-9\s\-]+?)(?:\s+along|\s+for|\s+in\s+terms|\s+regarding|\?|$|\.)',
+            # "difference between X and DEVICE"
+            r'difference\s+between\s+.+?\s+and\s+(?:the\s+|a\s+)?([a-z0-9][a-z0-9\s\-]+?)(?:\s+along|\s+for|\s+in\s+terms|\?|$|\.)',
+            # "better/worse than DEVICE"
+            r'(?:better|worse)\s+than\s+(?:the\s+|a\s+)?([a-z0-9][a-z0-9\s\-]+?)(?:\s+along|\s+for|\s+in\s+terms|\?|$|\.)',
         ]
         
         for pattern in patterns:
             match = re.search(pattern, query_lower, re.IGNORECASE)
             if match:
                 device_name = match.group(1).strip()
-                # Clean up common trailing words
-                device_name = re.sub(r'\s+(for\s+.+|in\s+terms\s+.+|\?)$', '', device_name)
-                if len(device_name) > 3:  # Minimum reasonable device name length
+                device_name = self._clean_device_name(device_name, device_brands)
+                if device_name and len(device_name) > 3:
                     return device_name
+        
+        # Fallback: Look for known brand names followed by model info
+        for brand in device_brands:
+            pattern = rf'\b({brand}\s+[a-z0-9][a-z0-9\s\-]*?)(?:\s+along|\s+for|\s+in\s+terms|\s+regarding|\?|$|\.)'
+            match = re.search(pattern, query_lower)
+            if match:
+                device_name = self._clean_device_name(match.group(1).strip(), device_brands)
+                # Make sure it's not the "this device" being compared
+                if device_name and len(device_name) > 3 and 'this' not in device_name:
+                    return device_name
+        
+        return None
+    
+    def _clean_device_name(self, device_name: str, device_brands: List[str]) -> Optional[str]:
+        """Clean up extracted device name by removing trailing noise."""
+        if not device_name:
+            return None
+        
+        # Words that indicate end of device name
+        stop_phrases = [
+            'along with', 'for price', 'for gaming', 'for video', 'for photo',
+            'in terms of', 'regarding', 'about', 'including', 'with price',
+            'along', 'price', 'specs', 'specification', 'features', 'pros',
+            'cons', 'comparison', 'compare', 'performance'
+        ]
+        
+        # Remove stop phrases from the end
+        cleaned = device_name.lower().strip()
+        for phrase in stop_phrases:
+            if cleaned.endswith(phrase):
+                cleaned = cleaned[:-len(phrase)].strip()
+            # Also check with space prefix
+            if f' {phrase}' in cleaned:
+                cleaned = cleaned.split(f' {phrase}')[0].strip()
+        
+        # Remove trailing punctuation and whitespace
+        cleaned = re.sub(r'[\s\?\.\,\!]+$', '', cleaned)
+        
+        # Validate: should contain at least one brand or look like a device name
+        has_brand = any(brand in cleaned for brand in device_brands)
+        has_model_number = bool(re.search(r'\d', cleaned))
+        
+        if has_brand or has_model_number or len(cleaned) > 5:
+            return cleaned if cleaned else None
         
         return None
     
